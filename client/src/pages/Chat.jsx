@@ -1,5 +1,12 @@
+import { useContext } from "react";
+import { ChatContext } from "../context/ChatContext";
+
 const Chat = () => {
-    return ( <>Chat App Working</> );
+    const { userChats, isUserChatsLoading, userChatsError} = useContext(ChatContext)
+
+    console.log("userChats", userChats)
+
+    return <>Chat</>;
 }
  
 export default Chat;
