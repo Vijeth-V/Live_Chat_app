@@ -6,7 +6,7 @@ const potentialChats = () => {
     const {user} = useContext(AuthContext)
     const {potentialChats, createChat, onlineUsers} = useContext(ChatContext);
     
-    return <>
+    return (<>
     <div className="all-users">
         {potentialChats && potentialChats.map((u, index)=>{
             return(
@@ -18,7 +18,8 @@ const potentialChats = () => {
             );
         })}
     </div>
-    </>;
+    </>
+    );
 }
  
 export default potentialChats;
