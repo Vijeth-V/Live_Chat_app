@@ -123,7 +123,7 @@ export const ChatContextProvider = ({ children ,user }) => {
             }
         }
         getUserChats()
-    }, [user]);
+    }, [user, notifications]);
 
 
     useEffect(() =>{
@@ -205,6 +205,26 @@ export const ChatContextProvider = ({ children ,user }) => {
         setNotifications(mNotifications)
     }, [])
 
+
+    const markThisUserNotificationsAsRead = useCallback((thisUserNotifications, notifications) =>{
+        //mark notifications as read
+        const mNotifications = notifications.map(el => {
+            let notification;
+
+            thisUserNotifications.forEach(n => {
+                if(n.senderId  === el.senderId){
+                    notification = {...n, isRead: true}
+                }
+                else{
+                    notification = el
+                }
+            });
+
+            return notification 
+        })
+        setNotifications(mNotifications)
+    } ,[])
+
     return<ChatContext.Provider value = {{
         userChats,
         isUserChatsLoading,
@@ -221,7 +241,8 @@ export const ChatContextProvider = ({ children ,user }) => {
         notifications,
         allUsers,
         markAllNotificationsAsRead,
-        markNotificationAsRead
+        markNotificationAsRead,
+        markThisUserNotificationsAsRead
     }}>{children}</ChatContext.Provider>
 
 }
